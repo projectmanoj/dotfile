@@ -94,30 +94,25 @@ scroll() {
 }
 
 mouse_clicked() {
-	case "$NAME" in
-	"spotify.next")
-		next
-		;;
-	"spotify.back")
-		back
-		;;
-	"spotify.play")
-		play
-		;;
-	"spotify.shuffle")
-		shuffle
-		;;
-	"spotify.repeat")
-		repeat
-		;;
-	"spotify.state")
-		scrubbing
-		;;
-	*)
-		exit
-		;;
-	esac
+    case "$NAME" in
+    "spotify.next")    next ;;
+    "spotify.back")    back ;;
+    "spotify.play")    play ;;
+    "spotify.shuffle") shuffle ;;
+    "spotify.repeat")  repeat ;;
+    "spotify.state")   scrubbing ;;
+    *)
+        # Toggle the popup when clicking the main bar item
+        CURRENT_STATE=$(sketchybar --query "$NAME" | jq -r '.popup.drawing')
+        if [ "$CURRENT_STATE" = "on" ]; then
+            sketchybar --set "$NAME" popup.drawing=off
+        else
+            sketchybar --set "$NAME" popup.drawing=on
+        fi
+        ;;
+    esac
 }
+
 
 popup() {
 	sketchybar --set spotify.anchor popup.drawing=$1
@@ -142,7 +137,8 @@ case "$SENDER" in
 	popup on
 	;;
 "mouse.exited" | "mouse.exited.global")
-	popup off
+	# sleep 0.5
+	# popup off
 	;;
 "routine")
 	routine

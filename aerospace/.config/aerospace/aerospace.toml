@@ -4,7 +4,8 @@ start-at-login = true
 enable-normalization-flatten-containers = true
 enable-normalization-opposite-orientation-for-nested-containers = true
 accordion-padding = 0
-default-root-container-layout = 'tiles'
+# Possible values: tiles|accordion
+default-root-container-layout = 'accordion'
 default-root-container-orientation = 'auto'
 key-mapping.preset = 'qwerty'
 on-focused-monitor-changed = ['move-mouse monitor-lazy-center']
@@ -27,12 +28,31 @@ outer.bottom = 0
 outer.top = 30
 outer.right = 0
 
+
 [mode.main.binding]
 alt-slash = 'layout tiles horizontal vertical'
-alt-comma = 'layout tiles horizontal horizontal'
-alt-cmd-m = 'resize smart -50'
-alt-cmd-i = 'resize smart +50'
-alt-shift-h = 'move-mouse monitor-force-center'
+alt-comma = 'layout accordion horizontal vertical'
+alt-esc = 'layout floating tiling'
+# alt-s = 'layout v_accordion'
+# alt-tab = 'workspace-back-and-forth'
+
+
+alt-minus = 'resize smart -50'
+alt-equal = 'resize smart +50'
+alt-shift-d = 'move-mouse monitor-force-center'
+
+
+alt-h = 'focus left'
+alt-j = 'focus down'
+alt-k = 'focus up'
+alt-l = 'focus right'
+
+
+alt-shift-h = 'move left'
+alt-shift-j = 'move down'
+alt-shift-k = 'move up'
+alt-shift-l = 'move right'
+
 
 alt-1 = 'workspace 1'
 alt-2 = 'workspace 2'
@@ -46,7 +66,6 @@ alt-9 = 'workspace 9'
 
 
 # alt-a = 'workspace 1' # Alacritty
-
 # alt-b = 'workspace b' # browser
 # alt-c = 'workspace c' # VS Code
 # alt-l = 'workspace 2' # Alacritty
@@ -112,3 +131,22 @@ run = 'move-node-to-workspace 5'
 [[on-window-detected]]
 if.app-id = 'com.figma.Desktop'
 run = 'move-node-to-workspace 6'
+
+
+
+#-----------Free Flow---------------------
+[[on-window-detected]]
+if.app-id = 'com.apple.clock'
+run = 'layout floating'
+
+[[on-window-detected]]
+if.app-id = 'com.eltima.elmedia6.mas'
+run = 'layout floating'
+
+[[on-window-detected]]
+if.app-id = 'com.tdesktop.Telegram'
+run = 'layout floating'
+
+[[on-window-detected]]
+if.app-id = 'com.spotify.client'
+run = 'layout floating'
